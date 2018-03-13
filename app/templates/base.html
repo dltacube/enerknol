@@ -1,0 +1,27 @@
+<html>
+<head>
+    Blog?
+</head>
+<body>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>
+                {{ message }}
+            </li>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+</ul>
+{% block content %}{% endblock %}
+</body>
+    <div>
+        <a href="{{ url_for('index') }}">home</a>
+        {% if not current_user.is_authenticated %}
+            <a href="{{ url_for('login') }}">login</a>
+        {% else %}
+            <a href="{{ url_for('logout') }}">logout</a>
+        {% endif %}
+    </div>
+</html>
