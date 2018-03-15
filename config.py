@@ -9,7 +9,6 @@ class Config(object):
                               'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     ELASTIC_SEARCH_URL = os.environ.get('SEARCHBOX_SSL_URL') or {'host': 'localhost', 'port': '9200'}
-    # SEARCHBOX_SSL_URL = os.environ.get('SEARCHBOX_SSL_URL') or None
 
     mongo_uri = os.environ.get('MONGODB_SETTINGS')
     if mongo_uri:

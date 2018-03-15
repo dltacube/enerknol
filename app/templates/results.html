@@ -8,6 +8,7 @@
         <button class="btn btn-default" onclick="location.href='{{ prev_url or "#" }}'" type="button">previous</button>
         <button class="btn btn-default" onclick="location.href='{{ next_url or '#' }}'" type="button">next</button>
         {% set term = request.args.get('q') %}
+            <br>
         {% for movie in movies %}
             <samp>
                 <div><strong>_id: </strong>{{ movie['_id']|mark }}</div>
