@@ -1,34 +1,25 @@
-<html>
-<head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-</head>
-<body>
-<div class="image-placeholder">
-    {{ url_for('static', filename='main.css') }}
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-            {% for message in messages %}
-                <li>
-                    {{ message }}
-                </li>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    </ul>
-    <div class="EnerKnol">
-        <h1>EnerKnol</h1>
-    </div>
-    {% block content %}{% endblock %}
-    <div>
-        <a href="{{ url_for('index') }}">home</a>
+{% extends 'bootstrap/base.html' %}
+{% block title %}
+    Stuff
+{% endblock %}
+{% block navbar %}
+    <nav class="navbar navbar-default">
+        <a class="navbar-brand" href="{{ url_for('index') }}">home</a>
         {% if not current_user.is_authenticated %}
-            <a href="{{ url_for('login') }}">login</a>
+            <a class="col-md-4, navbar-brand" href="{{ url_for('login') }}">login</a>
         {% else %}
-            <a href="{{ url_for('logout') }}">logout</a>
+            <a class="col-md-4, navbar-brand" href="{{ url_for('logout') }}">logout</a>
         {% endif %}
-        <a href="{{ url_for('search') }}">search</a>
-    </div>
-</div>
-</body>
-</html>
+        <a class="col-md-4, navbar-brand" href="{{ url_for('search') }}">search</a>
+    </nav>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                    {% for message in messages %}
+                            <div class="alert alert-info" role="alert">{{ message }}</div>
+                    {% endfor %}
+            {% endif %}
+        {% endwith %}
+{% endblock %}
+
+
+{% block content %}{% endblock %}

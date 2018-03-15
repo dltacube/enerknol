@@ -1,22 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% if not movies.count() > 0 %}
-        <p>No results found.</p>
-    {% endif %}
-    {% for movie in movies %}
-        <p>
-            <div>_id: {{ movie['_id'] }}</div>
-            <div>budget: {{ movie['budget'] }}</div>
-            <div>homepage: {{ movie['homepage'] }}</div>
-            <div>imdb_id: {{ movie['imdb_id'] }}</div>
-            <div>original_title: {{ movie['original_title'] }}</div>
-            <div>overview: {{ movie['overview'] }}</div>
-            <div>release_date: {{ movie['release_date'] }}</div>
-            <div>runtime: {{ movie['runtime'] }}</div>
-            <div>tagline: {{ movie['tagline'] }}</div>
-            <div>vote_average: {{ movie['vote_average'] }}</div>
-            <div>vote_count: {{ movie['vote_count'] }}</div>
-    {% endfor %}
-    <a href="{{ prev_url or '#' }}">previous</a>
-    <a href="{{ next_url or '#' }}">next</a>
+    <div class="container">
+
+        {% if not movies.count() > 0 %}
+            <p>No results found.</p>
+        {% endif %}
+        <button class="btn btn-default" onclick="location.href='{{ prev_url or "#" }}'" type="button">previous</button>
+        <button class="btn btn-default" onclick="location.href='{{ next_url or '#' }}'" type="button">next</button>
+        {% set term = request.args.get('q') %}
+        {% for movie in movies %}
+            <samp>
+                <div><strong>_id: </strong>{{ movie['_id']|mark }}</div>
+                <div><strong>budget: </strong>{{ movie['budget']|mark }}</div>
+                <div><strong>homepage: </strong>{{ movie['homepage']|mark }}</div>
+                <div><strong>imdb_id: </strong>{{ movie['imdb_id']|mark }}</div>
+                <div><strong>original_title: </strong>{{ movie['original_title']|mark }}</div>
+                <div><strong>overview: </strong>{{ movie['overview']|mark }}</div>
+                <div><strong>release_date: </strong>{{ movie['release_date']|mark }}</div>
+                <div><strong>runtime: </strong>{{ movie['runtime']|mark }}</div>
+                <div><strong>tagline: </strong>{{ movie['tagline']|mark }}</div>
+                <div><strong>vote_average: </strong>{{ movie['vote_average']|mark }}</div>
+                <div><strong>vote_count: </strong>{{ movie['vote_count']|mark }}</div>
+            </samp>
+            <hr>
+        {% endfor %}
+        <button class="btn btn-default" onclick="location.href='{{ prev_url or "#" }}'" type="button">previous</button>
+        <button class="btn btn-default" onclick="location.href='{{ next_url or '#' }}'" type="button">next</button>
+    </div>
 {% endblock %}
