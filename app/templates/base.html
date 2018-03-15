@@ -1,21 +1,25 @@
 <html>
 <head>
-    Blog?
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body>
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul>
-        {% for message in messages %}
-            <li>
-                {{ message }}
-            </li>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-</ul>
-{% block content %}{% endblock %}
-</body>
+<div class="image-placeholder">
+    {{ url_for('static', filename='main.css') }}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>
+                    {{ message }}
+                </li>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    </ul>
+    <div class="EnerKnol">
+        <h1>EnerKnol</h1>
+    </div>
+    {% block content %}{% endblock %}
     <div>
         <a href="{{ url_for('index') }}">home</a>
         {% if not current_user.is_authenticated %}
@@ -23,5 +27,8 @@
         {% else %}
             <a href="{{ url_for('logout') }}">logout</a>
         {% endif %}
+        <a href="{{ url_for('search') }}">search</a>
     </div>
+</div>
+</body>
 </html>
