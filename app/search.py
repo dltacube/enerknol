@@ -1,20 +1,15 @@
 from flask import current_app
+from elasticsearch_dsl import Search
+from elasticsearch_dsl.query import MultiMatch
 
 
-def query_index(query, page, per_page):
+def query_index(q, page, per_page):
     if not current_app.elasticsearch:
         return [], 0
-    search = current_app.elasticsearch.search(
-        index='media',
-        doc_type='movies',
-        body={'query': {
-            'multi_match': {
-                'query': query,
-            }},
-            'from': (page - 1) * per_page,
-            'size': per_page
-        }
-    )
-    ids = [res['_id'] for res in search['hits']['hits']]
-    return ids, search['hits']['total']
+    s = Search(using=current_app.elasticsearch, index="media")
+    start = (page - 1) * per_page
+    end = page * per_page
+    result = s.query(MultiMatch(query=q))[start: end].execute()
 
+    ids = [res['_id'] for res in result['hits']['hits']]
+    return ids, result['hits']['total']

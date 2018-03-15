@@ -45,9 +45,6 @@ class Movies(mongo.Document):
         return movies, total
 
 
-Movies.objects
-
-
 @login.user_loader
 def load_user(_id):
     return User.query.get(int(_id))
