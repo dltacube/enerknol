@@ -1,5 +1,4 @@
 import json
-
 from requests import put
 
 with open('media.movies.json') as file:
