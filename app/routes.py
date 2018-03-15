@@ -3,7 +3,6 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from app.models import User, Movies
 from . import app, db
-from .base_handlers import render
 from .forms import LoginForm, RegistrationForm, SearchForm
 
 
@@ -65,4 +64,4 @@ def search():
     movies, total = Movies.search(query, page, per_page)
     next_url = url_for('search', page=page + 1, q=query) if page * per_page < total else None
     prev_url = url_for('search', page=page - 1, q=query) if page > 1 else None
-    return render('results.html', movies=movies, next_url=next_url, prev_url=prev_url)
+    return render_template('results.html', movies=movies, next_url=next_url, prev_url=prev_url)
