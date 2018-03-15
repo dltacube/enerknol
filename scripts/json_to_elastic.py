@@ -1,10 +1,11 @@
 import json
 from time import sleep
 
+import os
 from elasticsearch import Elasticsearch
 from elasticsearch.exceptions import AuthenticationException, RequestError
 
-es = Elasticsearch(['***REMOVED***'], verify_certs=True)
+es = Elasticsearch([os.environ.get('ELASTIC_SEARCH_URL') ], verify_certs=True)
 with open('media.movies.json') as file:
     movies = []
     for line in file.readlines():
@@ -23,4 +24,3 @@ for movie in movies:
 
     print(r['result'])
     # r = put('http://localhost:9200/media/movies/' + str(_id), data=json.dumps(movie), headers={'content-type': 'application/json'})
-    # print(r)
