@@ -18,7 +18,7 @@ login.login_view = 'login'
 
 mongo = MongoEngine(app)
 
-app.elasticsearch = Elasticsearch([app.config['ELASTIC_SEARCH_URL']]) if app.config['ELASTIC_SEARCH_URL'] else None
+app.elasticsearch = Elasticsearch([app.config['ELASTIC_SEARCH_URL'], app.config['SEARCHBOX_SSL_URL']]) if app.config['ELASTIC_SEARCH_URL'] else None
 
 # Avoids circular imports
 from app import routes, models
