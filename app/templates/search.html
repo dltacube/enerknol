@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-    <input type="search">
+    <form action="{{ url_for('search') }}" method="get">
+        <p>
+            {{ form.q.label }}
+            {{ form.q(size=32) }}
+        </p>
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
 {% endblock %}

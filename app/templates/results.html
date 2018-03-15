@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for movie in movies %}
+        <p>
+            <div>_id: {{ movie['_id'] }}</div>
+            <div>budget: {{ movie['budget'] }}</div>
+            <div>homepage: {{ movie['homepage'] }}</div>
+            <div>imdb_id: {{ movie['imdb_id'] }}</div>
+            <div>original_title: {{ movie['original_title'] }}</div>
+            <div>overview: {{ movie['overview'] }}</div>
+            <div>release_date: {{ movie['release_date'] }}</div>
+            <div>runtime: {{ movie['runtime'] }}</div>
+            <div>tagline: {{ movie['tagline'] }}</div>
+            <div>vote_average: {{ movie['vote_average'] }}</div>
+            <div>vote_count: {{ movie['vote_count'] }}</div>
+    {% endfor %}
+    <a href="{{ prev_url or '#' }}">previous</a>
+    <a href="{{ next_url or '#' }}">next</a>
+{% endblock %}
