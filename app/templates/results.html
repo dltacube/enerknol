@@ -2,9 +2,9 @@
 {% block content %}
     <div class="container">
 
-        {% if not movies.count() > 0 %}
+        {% if not movies %}
             <p>No results found.</p>
-        {% endif %}
+        {% elif movies %}
         <button class="btn btn-default" onclick="location.href='{{ prev_url or "#" }}'" type="button">previous</button>
         <button class="btn btn-default" onclick="location.href='{{ next_url or '#' }}'" type="button">next</button>
         {% set term = request.args.get('q') %}
@@ -27,4 +27,5 @@
         <button class="btn btn-default" onclick="location.href='{{ prev_url or "#" }}'" type="button">previous</button>
         <button class="btn btn-default" onclick="location.href='{{ next_url or '#' }}'" type="button">next</button>
     </div>
+    {% endif %}
 {% endblock %}
