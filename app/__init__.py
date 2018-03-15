@@ -1,6 +1,5 @@
 from flask import Flask
-from flask_pymongo import PyMongo
-
+from flask_mongoengine import MongoEngine
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -17,7 +16,8 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
 
-mongo = PyMongo(app)
+mongo = MongoEngine(app)
+
 app.elasticsearch = Elasticsearch([app.config['ELASTIC_SEARCH_URL']]) if app.config['ELASTIC_SEARCH_URL'] else None
 
 # Avoids circular imports

@@ -1,8 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import db, login, mongo
-from bson.objectid import ObjectId
-
 from app.search import query_index
 
 
@@ -22,20 +20,32 @@ class User(UserMixin, db.Model):
         return '<User {}>'.format(self.username)
 
 
-class Movies:
-    projections = ['_id', 'budget', 'homepage', 'imdb_id', 'original_title', 'overview', 'release_date', 'runtime', 'tagline', 'vote_average', 'vote_count']
+class Movies(mongo.Document):
+    meta = {'strict': False}
+    projections = ['_id', 'budget', 'homepage', 'imdb_id', 'original_title', 'overview', 'release_date', 'runtime', 'tagline']
+
+    _id = mongo.ObjectIdField()
+    original_title = mongo.StringField()
+    overview = mongo.StringField()
+    tagline = mongo.StringField()
+    runtime = mongo.IntField()
+    budget = mongo.IntField()
+    homepage = mongo.StringField()
+    release_date = mongo.DateTimeField()
+
+    def __repr__(self):
+        return '{} - id: {}: {}'.format(str(self.__class__), self._id, self.original_title)
 
     @classmethod
     def search(cls, query, page, per_page):
         ids, total = query_index(query, page, per_page)
         if total == 0:
             return {'results': None}
-        oids = [ObjectId(_id) for _id in ids]
-        res = mongo.db.movies.find({'_id': {'$in': oids}}, projection=cls.projections)
-        print('res: {}'.format(res.count()))
-        movies = [movie for movie in res]
-        print('movies: {}'.format(movies))
+        movies = Movies.objects(_id__in=ids)
         return movies, total
+
+
+Movies.objects
 
 
 @login.user_loader

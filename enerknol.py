@@ -1,5 +1,5 @@
 from app import app, db, mongo
-from app.models import User
+from app.models import User, Movies
 
 if __name__ == '__main__':
     app.run(debug=True)
@@ -7,4 +7,4 @@ if __name__ == '__main__':
 
 @app.shell_context_processor
 def shell_ctx():
-    return {'db': db, 'User': User, 'mongo': mongo}
+    return {'db': db, 'User': User, 'mongo': mongo, 'Movies': Movies}
