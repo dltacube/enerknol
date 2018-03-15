@@ -40,7 +40,7 @@ class Movies(mongo.Document):
     def search(cls, query, page, per_page):
         ids, total = query_index(query, page, per_page)
         if total == 0:
-            return {'results': None}
+            return [], 0
         movies = Movies.objects(_id__in=ids)
         return movies, total
 

@@ -42,4 +42,4 @@ class SearchForm(FlaskForm):
             kwargs['csrf_enabled'] = False
         super(SearchForm, self).__init__(*args, **kwargs)
 
-    submit = SubmitField('Search')
+    submit = SubmitField('search')
