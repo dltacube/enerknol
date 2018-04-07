@@ -82,3 +82,11 @@ curl -XPOST localhost:9200/movies/my_doc_type/_bulk -H "Content-Type: applicatio
 * [ptpython](https://github.com/jonathanslenders/ptpython)
 * [flask-shell-ptpython](https://github.com/jacquerie/flask-shell-ptpython)
 * [flask](http://flask.pocoo.org/docs/0.12/)
+
+## Todo
+* Write a scraper?
+* Optimize index creation
+* Breakout authentication code
+* Use .env
+* Add tests
+* Flesh out pagination
